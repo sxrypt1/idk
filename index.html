@@ -139,11 +139,11 @@ canvas#snow{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:no
   user-select:none;-webkit-user-select:none;}
 .lyr:hover{filter:brightness(1.28)}
 .lyr:active{transform:scaleX(1.03)}
-.lyr.locked{filter:brightness(.52) saturate(.6);cursor:default}
+.lyr.locked{cursor:default}
 .lyr.glowing{animation:layerGlow 1s ease-in-out infinite,layerUnlock .45s ease forwards}
-.lyr.l1{height:clamp(44px,12vw,58px);background:linear-gradient(#C67A3A,#7A3A10)}
-.lyr.l2{height:clamp(44px,10vw,50px);width:91%;background:linear-gradient(#5A8C6A,var(--md))}
-.lyr.l3{height:clamp(44px,9vw,46px);width:82%;background:linear-gradient(var(--dr),var(--cr))}
+.lyr.l1{height:clamp(44px,12vw,58px);background:linear-gradient(#E8913A,#C06818)}
+.lyr.l2{height:clamp(44px,10vw,50px);width:91%;background:linear-gradient(#7DBF72,#3d7a4a)}
+.lyr.l3{height:clamp(44px,9vw,46px);width:82%;background:linear-gradient(#D42B2B,#8B0000)}
 .frost{height:clamp(8px,2.5vw,13px);border-radius:5px;width:calc(100% + 6px)}
 .frost1{background:linear-gradient(var(--cream),var(--parch))}
 .frost2{background:linear-gradient(var(--ml),var(--mg));width:calc(93% + 6px)}
@@ -376,9 +376,7 @@ canvas,svg{max-width:100%;height:auto}
 </div>
 
 <div class="top-note">
-  <div class="top-note-inner">
-    <p class="top-note-text">tbh idk if this thing will ever see the light of day but idek anymore i have nothing better to do</p>
-  </div>
+  <p style="color:rgba(245,240,232,.45);font-family:'Space Mono',monospace;font-size:.8rem;line-height:1.7;padding:20px 4px 0">tbh idk if this thing will ever see the light of day but idek anymore i have nothing better to do so y not fr, i miss you so lowk worth it rmmbring stuff</p>
 </div>
 
 <div class="page">
@@ -388,7 +386,7 @@ canvas,svg{max-width:100%;height:auto}
     <div class="subtitle">hi, me again...</div>
 
     <div id="roseBouquet" onclick="roseClick()" style="cursor:pointer;touch-action:manipulation;margin:4px 0 0">
-      <canvas id="roseCanvas" width="180" height="200" style="display:block;margin:0 auto"></canvas>
+      <canvas id="roseCanvas" width="220" height="280" style="display:block;margin:0 auto"></canvas>
       <div id="roseTapHint" style="font-family:'Dancing Script',cursive;font-size:.78rem;color:rgba(245,240,232,.38);letter-spacing:1px;text-align:center;margin-top:2px">tap the roses</div>
     </div>
     <div id="rosePetals" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9993"></div>
@@ -441,7 +439,7 @@ canvas,svg{max-width:100%;height:auto}
     <div class="scratch-wrap" id="scratchWrap">
       <div class="scratch-reveal">
         <p>i know we haven't talked in a while.<br>
-        mostly because of my actions <br><br>
+        and thats all on me <br><br>
         but out of all days, today is just too special<br>
         i couldn't not make you something<br><br>
         </p>
@@ -494,7 +492,7 @@ canvas,svg{max-width:100%;height:auto}
       <div class="env-hint">tap the envelope</div>
       <div class="env-letter" id="envLetter">
         <div style="color:#E8891C;font-size:1.05em;margin-bottom:14px">Mena,</div>
-        <p>first of all, happy birthday. i hope you're doing well, honestly im not sure where im gonna go with this message but i hope it doesnt result in anything negative, i just wanted to say that no matter what happened you're still one of the best people ive met and i hope you're genuinely happy, you're one of the few ones that deserve it, and even though we didnt talk as much as id hoped it was still the closest i ever got to a person, i had this type of unexplainable feeling whenever we did talk, id catch myself smiling at my phone too hard then think about how good my life had become, you made me feel that i belonged for once and you had your own special way with words i always appreciated, you're one of the sweetest and most genuine people out there, and whatever obstacle you're going through or might go through in the future, i believe in you and know that you're able to surpass it no matter what, also i really hope you write a wish or however many you want but its perfectly fine if you dont want to, anyways i hope you enjoy the rest of your day.</p><br>
+        <p>first of all, happy birthday. i hope you're doing well, honestly im not sure where im gonna go with this message but i hope it doesnt result in anything negative, i just wanted to say that no matter what happened you're still one of the best people ive met and i hope you're genuinely happy, you're one of the few ones that deserve it, even though we didnt talk as much as id hoped it was still the closest i ever got to a person, i had this type of unexplainable feeling whenever we did talk, id catch myself smiling at my phone too hard then think about how good my life had become, you made me feel that i belonged for once, genuinely thank you for that, you had your own special way with words i always appreciated, you're one of the sweetest and most genuine people out there, and whatever obstacle you're going through or might go through in the future, i believe in you and know that you're able to surpass it no matter what,youre one of the strongest people ive encountered emotionally,  also id really appreciate if you write a wish or something, anyways i hope you enjoy the rest of your day.</p><br>
       </div>
     </div>
   </div>
@@ -532,9 +530,8 @@ function pCount(full){ return reducedMotion ? 0 : isSmall ? Math.floor(full*.45)
   const c = document.getElementById('roseCanvas');
   if(!c) return;
   const ctx = c.getContext('2d');
-  const W = 180, H = 200;
+  const W = 220, H = 280;
 
-  /* Scale canvas for high-DPI / Retina screens */
   const dpr = window.devicePixelRatio || 1;
   c.width  = W * dpr;
   c.height = H * dpr;
@@ -542,35 +539,184 @@ function pCount(full){ return reducedMotion ? 0 : isSmall ? Math.floor(full*.45)
   c.style.height = H + 'px';
   ctx.scale(dpr, dpr);
 
-  function drawRose(cx, cy, size, dark){
-    const base = dark ? '#6B0000' : '#A01010';
-    const mid  = dark ? '#9B1010' : '#C0392B';
-    const hi   = dark ? '#B03020' : '#D45040';
-    const cent = dark ? '#5A0000' : '#800000';
-    for(let i=0;i<6;i++){const a=(i/6)*Math.PI*2,px=cx+Math.cos(a)*size*.72,py=cy+Math.sin(a)*size*.72;ctx.beginPath();ctx.ellipse(px,py,size*.52,size*.38,a,0,Math.PI*2);ctx.fillStyle=base;ctx.fill();}
-    for(let i=0;i<5;i++){const a=(i/5)*Math.PI*2+.3,px=cx+Math.cos(a)*size*.38,py=cy+Math.sin(a)*size*.38;ctx.beginPath();ctx.ellipse(px,py,size*.38,size*.28,a,0,Math.PI*2);ctx.fillStyle=mid;ctx.fill();}
-    for(let i=0;i<4;i++){const a=(i/4)*Math.PI*2+.6,px=cx+Math.cos(a)*size*.18,py=cy+Math.sin(a)*size*.18;ctx.beginPath();ctx.ellipse(px,py,size*.24,size*.18,a,0,Math.PI*2);ctx.fillStyle=hi;ctx.fill();}
-    ctx.beginPath();ctx.ellipse(cx,cy,size*.14,size*.14,0,0,Math.PI*2);ctx.fillStyle=cent;ctx.fill();
+  /* ── rose ── */
+  function drawRose(cx, cy, size, variant){
+    // variant: 0=deep red, 1=mid red, 2=bright red, 3=blush pink
+    const palettes = [
+      {base:'#5a0000',mid:'#8B0000',hi:'#B03020',cent:'#3d0000',shadow:'rgba(0,0,0,0.22)'},
+      {base:'#7a0a0a',mid:'#A01010',hi:'#C0392B',cent:'#580000',shadow:'rgba(0,0,0,0.18)'},
+      {base:'#9B1010',mid:'#C0392B',hi:'#E05040',cent:'#780000',shadow:'rgba(0,0,0,0.14)'},
+      {base:'#8B3a52',mid:'#B05070',hi:'#D07090',cent:'#5a1e34',shadow:'rgba(0,0,0,0.18)'},
+    ];
+    const p = palettes[variant % palettes.length];
+    // outer petals
+    for(let i=0;i<7;i++){
+      const a=(i/7)*Math.PI*2, px=cx+Math.cos(a)*size*.78, py=cy+Math.sin(a)*size*.78;
+      ctx.beginPath();ctx.ellipse(px,py,size*.56,size*.4,a,0,Math.PI*2);
+      ctx.fillStyle=p.base;ctx.fill();
+      // petal shadow
+      ctx.beginPath();ctx.ellipse(px+Math.cos(a)*2,py+Math.sin(a)*2,size*.3,size*.22,a,0,Math.PI*2);
+      ctx.fillStyle=p.shadow;ctx.fill();
+    }
+    // mid petals
+    for(let i=0;i<6;i++){
+      const a=(i/6)*Math.PI*2+.5, px=cx+Math.cos(a)*size*.42, py=cy+Math.sin(a)*size*.42;
+      ctx.beginPath();ctx.ellipse(px,py,size*.38,size*.28,a,0,Math.PI*2);
+      ctx.fillStyle=p.mid;ctx.fill();
+    }
+    // inner petals
+    for(let i=0;i<5;i++){
+      const a=(i/5)*Math.PI*2+1, px=cx+Math.cos(a)*size*.2, py=cy+Math.sin(a)*size*.2;
+      ctx.beginPath();ctx.ellipse(px,py,size*.26,size*.19,a,0,Math.PI*2);
+      ctx.fillStyle=p.hi;ctx.fill();
+    }
+    // spiral center
+    for(let i=0;i<3;i++){
+      const a=(i/3)*Math.PI*2+1.5, px=cx+Math.cos(a)*size*.08, py=cy+Math.sin(a)*size*.08;
+      ctx.beginPath();ctx.ellipse(px,py,size*.13,size*.1,a+.8,0,Math.PI*2);
+      ctx.fillStyle=p.hi;ctx.fill();
+    }
+    ctx.beginPath();ctx.ellipse(cx,cy,size*.1,size*.1,0,0,Math.PI*2);
+    ctx.fillStyle=p.cent;ctx.fill();
   }
 
-  function drawLeaf(x1,y1,x2,y2,side){
-    ctx.beginPath();const mx=(x1+x2)/2+side*18,my=(y1+y2)/2;
-    ctx.moveTo(x1,y1);ctx.quadraticCurveTo(mx,my,x2,y2);ctx.quadraticCurveTo(mx*.6+x1*.4,my*.6+y1*.4,x1,y1);
-    ctx.fillStyle='#3a6b4a';ctx.fill();
+  /* ── leaf ── */
+  function drawLeaf(x1,y1,x2,y2,bulge,col){
+    const mx=(x1+x2)/2+bulge, my=(y1+y2)/2;
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    ctx.quadraticCurveTo(mx,my,x2,y2);
+    ctx.quadraticCurveTo(mx*.5+x1*.5,my*.5+y1*.5,x1,y1);
+    ctx.fillStyle=col||'#2d5a3a';ctx.fill();
+    // midrib
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(mx*.7+x2*.3,my*.7+y2*.3,x2,y2);
+    ctx.strokeStyle='rgba(20,50,20,0.35)';ctx.lineWidth=.8;ctx.stroke();
+  }
+
+  /* ── baby's breath dot ── */
+  function drawBabyBreath(cx,cy,r){
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.fillStyle='rgba(245,240,232,0.75)';ctx.fill();
+  }
+
+  /* ── fern-like sprig ── */
+  function drawSprig(bx,by,angle,len,col){
+    const ex=bx+Math.cos(angle)*len, ey=by+Math.sin(angle)*len;
+    ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(ex,ey);
+    ctx.strokeStyle=col||'#3a6b4a';ctx.lineWidth=1.2;ctx.stroke();
+    const steps=4;
+    for(let i=1;i<=steps;i++){
+      const t=i/(steps+1), lx=bx+(ex-bx)*t, ly=by+(ey-by)*t, leafLen=7-i;
+      for(const s of[-1,1]){
+        ctx.beginPath();ctx.moveTo(lx,ly);
+        ctx.lineTo(lx+Math.cos(angle+s*1.1)*leafLen, ly+Math.sin(angle+s*1.1)*leafLen);
+        ctx.stroke();
+      }
+    }
   }
 
   ctx.clearRect(0,0,W,H);
-  ctx.strokeStyle='#2D5016';ctx.lineWidth=2.5;ctx.lineCap='round';
-  ctx.beginPath();ctx.moveTo(55,190);ctx.bezierCurveTo(50,160,46,130,48,95);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(90,195);ctx.bezierCurveTo(90,165,90,135,90,98);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(125,190);ctx.bezierCurveTo(130,160,134,130,132,95);ctx.stroke();
-  drawLeaf(50,160,42,140,-1);drawLeaf(50,140,60,122,1);drawLeaf(90,160,80,140,-1);drawLeaf(132,155,142,135,1);
-  ctx.strokeStyle='#C0392B';ctx.lineWidth=3;
-  ctx.beginPath();ctx.moveTo(60,188);ctx.bezierCurveTo(50,178,44,168,55,168);ctx.bezierCurveTo(66,168,72,178,72,185);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(120,188);ctx.bezierCurveTo(130,178,136,168,125,168);ctx.bezierCurveTo(114,168,108,178,108,185);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(60,188);ctx.quadraticCurveTo(90,182,120,188);ctx.stroke();
-  ctx.beginPath();ctx.arc(90,187,5,0,Math.PI*2);ctx.fillStyle='#C0392B';ctx.fill();
-  drawRose(48,88,22,true);drawRose(132,88,22,true);drawRose(90,80,26,false);
+
+  /* ── stems (back to front) ── */
+  const stemColor='#2D5016';
+  ctx.lineCap='round';
+  // back stems – 5 total
+  const stems=[
+    {bx:95,by:265, cp1x:88,cp1y:210, cp2x:60,cp2y:160, ex:55,ey:115},
+    {bx:100,by:268,cp1x:100,cp1y:215,cp2x:100,cp2y:165,ex:100,ey:118},
+    {bx:105,by:265,cp1x:112,cp1y:210,cp2x:140,cp2y:165,ex:145,ey:118},
+    {bx:90, by:265,cp1x:74, cp1y:205,cp2x:40, cp2y:155,ex:34, ey:100},
+    {bx:110,by:265,cp1x:126,cp1y:205,cp2x:158,cp2y:150,ex:162,ey:100},
+  ];
+  ctx.strokeStyle=stemColor;
+  for(const s of stems){
+    ctx.lineWidth=2.2;
+    ctx.beginPath();ctx.moveTo(s.bx,s.by);ctx.bezierCurveTo(s.cp1x,s.cp1y,s.cp2x,s.cp2y,s.ex,s.ey);ctx.stroke();
+  }
+
+  /* ── wrapping paper / bouquet cone ── */
+  ctx.save();
+  // cone shape
+  ctx.beginPath();
+  ctx.moveTo(70,265);
+  ctx.lineTo(55,220);
+  ctx.quadraticCurveTo(100,210,145,220);
+  ctx.lineTo(130,265);
+  ctx.closePath();
+  const wrapGrad=ctx.createLinearGradient(70,230,130,230);
+  wrapGrad.addColorStop(0,'#3d1a0a');
+  wrapGrad.addColorStop(.45,'#5a2810');
+  wrapGrad.addColorStop(1,'#3a1508');
+  ctx.fillStyle=wrapGrad;ctx.fill();
+  // wrap pattern lines
+  ctx.strokeStyle='rgba(232,137,28,0.22)';ctx.lineWidth=1;
+  for(let i=0;i<5;i++){
+    const x=75+i*13;
+    ctx.beginPath();ctx.moveTo(x,265);ctx.lineTo(x-6,220);ctx.stroke();
+  }
+  // top fold highlight
+  ctx.beginPath();
+  ctx.moveTo(55,220);ctx.quadraticCurveTo(100,212,145,220);
+  ctx.strokeStyle='rgba(232,137,28,0.5)';ctx.lineWidth=1.5;ctx.stroke();
+  ctx.restore();
+
+  /* ── ribbon bow ── */
+  ctx.save();
+  const bx=100,by=222;
+  // left loop
+  ctx.beginPath();ctx.moveTo(bx,by);ctx.bezierCurveTo(bx-28,by-18,bx-30,by+10,bx,by+2);
+  ctx.fillStyle='#8B0000';ctx.fill();
+  ctx.strokeStyle='#C0392B';ctx.lineWidth=.8;ctx.stroke();
+  // right loop
+  ctx.beginPath();ctx.moveTo(bx,by);ctx.bezierCurveTo(bx+28,by-18,bx+30,by+10,bx,by+2);
+  ctx.fillStyle='#8B0000';ctx.fill();ctx.stroke();
+  // knot
+  ctx.beginPath();ctx.ellipse(bx,by,6,5,0,0,Math.PI*2);
+  ctx.fillStyle='#C0392B';ctx.fill();
+  ctx.restore();
+
+  /* ── back foliage ── */
+  drawLeaf(65,200,30,145,-22,'#2d5a3a');
+  drawLeaf(100,198,68,148,-18,'#3a6b4a');
+  drawLeaf(135,200,170,145,22,'#2d5a3a');
+  drawSprig(80,185,-1.4,38,'#3a6b4a');
+  drawSprig(120,185,-1.75,38,'#3a6b4a');
+  drawSprig(100,188,-1.57,45,'#4a7a58');
+
+  /* ── back-row roses (smaller, higher) ── */
+  drawRose(34,97,18,0);
+  drawRose(162,97,18,0);
+
+  /* ── more foliage between roses ── */
+  drawLeaf(55,130,78,108,15,'#4a7a58');
+  drawLeaf(145,130,122,108,-15,'#4a7a58');
+  drawLeaf(100,128,115,100,12,'#3a6b4a');
+  drawLeaf(100,128,85,100,-12,'#3a6b4a');
+
+  /* ── mid-row roses ── */
+  drawRose(63,112,22,1);
+  drawRose(138,112,22,3);
+
+  /* ── baby's breath clusters ── */
+  const bbPositions=[
+    [46,88],[38,95],[42,80],[156,88],[164,95],[160,80],
+    [72,75],[80,68],[66,70],[130,75],[122,68],[136,70],
+    [100,65],[107,58],[93,58],[100,75],
+  ];
+  for(const [bx,by] of bbPositions) drawBabyBreath(bx,by,2+Math.random()*1.5);
+
+  /* ── front center rose (largest) ── */
+  drawRose(100,100,28,2);
+
+  /* ── tiny accent buds ── */
+  function drawBud(cx,cy,size,variant){
+    const cols=[['#8B0000','#C0392B'],['#7a0a5a','#B05080'],['#5a0000','#900020']];
+    const [c1,c2]=cols[variant%cols.length];
+    ctx.beginPath();ctx.ellipse(cx,cy,size*.5,size*.7,-.2,0,Math.PI*2);ctx.fillStyle=c1;ctx.fill();
+    ctx.beginPath();ctx.ellipse(cx-size*.15,cy-size*.2,size*.3,size*.5,.3,0,Math.PI*2);ctx.fillStyle=c2;ctx.fill();
+    ctx.beginPath();ctx.ellipse(cx+size*.15,cy-size*.2,size*.3,size*.5,-.3,0,Math.PI*2);ctx.fillStyle=c2;ctx.fill();
+  }
+  drawBud(44,73,10,0);drawBud(158,73,10,2);drawBud(77,58,9,1);drawBud(124,58,9,0);
 })();
 
 /* ─── Rose click + easter egg ───────────────────────────────── */
@@ -709,7 +855,7 @@ setTimeout(positionCandles,120);
 
 /* ─── Cake layer REVEAL SEQUENCE ─────────────────────────────── */
 const layerMessages = {
-  red:    { emoji:'🌹', title:'red velvet', desc:'your favourite flower, your favourite layer', msg:'roses are your thing. always have been. this one\'s dyed the deepest red, just for you' },
+  red:    { emoji:'🌹', title:'red velvet', desc:'your favourite flower', msg:'roses are your thing. always have been. this one\'s dyed the deepest red just for you' },
   matcha: { emoji:'🍵', title:'matcha',     desc:'your weird obsession',                       msg:'i never understood your love for a grass drink, but i admired it' },
   carrot: { emoji:'🥕', title:'carrot cake', desc:'your beloved',                              msg:'this might be your favourite thing in the world so i couldn\'t forget it' }
 };
@@ -1019,6 +1165,8 @@ const memories=[
   'when your family was working on adopting a cat (i hope you got it)',
   'your dark red nails',
   'little mena with a knife',
+  'little dalla?',
+  '"shoo"',
   'when you came to me because of your dad\'s secretary(idk dont ask)',
   'no more...'
 ];
